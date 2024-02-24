@@ -15,7 +15,7 @@ def train_model(X_train, y_train, **kwargs):
     y_train : np.array
         Labels.
     kwargs : dict
-        Additional parameters to provide to the model
+        Additional model parameters
     Returns
     -------
     model : sklearn.linear_model.LogisticRegression
@@ -58,11 +58,11 @@ def inference(model, X):
     model : sklearn.linear_model.LogisticRegression
         Trained machine learning model.
     X : np.array
-        Data used for prediction.
+        Features used for prediction.
     Returns
     -------
     preds : np.array
-        Predictions from the model.
+        Predicted labels from the model.
     """
     return model.predict(X)
 
@@ -139,12 +139,15 @@ def performance_on_categorical_slice(
     fbeta : float
 
     """
-    # TODO: implement the function
+    sliced_data = data[data[column_name] == slice_value]
     X_slice, y_slice, _, _ = process_data(
-        # your code here
-        # for input data, use data in column given as "column_name", with the slice_value 
-        # use training = False
+        X=sliced_data,
+        categorical_features=categorical_features,
+        label=label,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
-    preds = # your code here to get prediction on X_slice using the inference function
+    preds = inference(model, X_slice)
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta
