@@ -4,3 +4,4 @@ fastapi/lib
 fastapi/lib64
 fastapi/pyenv.cfg
 __pycache__
+*.pkl
