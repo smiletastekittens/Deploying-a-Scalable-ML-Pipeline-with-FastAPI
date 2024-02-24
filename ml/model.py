@@ -1,10 +1,10 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.linear_model import LogisticRegression
 from ml.data import process_data
-# TODO: add necessary import
 
-# Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+
+def train_model(X_train, y_train, **kwargs):
     """
     Trains a machine learning model and returns it.
 
@@ -14,13 +14,18 @@ def train_model(X_train, y_train):
         Training data.
     y_train : np.array
         Labels.
+    kwargs : dict
+        Additional parameters to provide to the model
     Returns
     -------
-    model
+    model : sklearn.linear_model.LogisticRegression
         Trained machine learning model.
     """
-   # TODO: implement the function
-    pass
+    try:
+        lr = LogisticRegression(**kwargs).fit(X_train, y_train)
+    except Exception as e:
+        raise Exception(f"Could not create and train model: {type(e)}: {e}")
+    return lr
 
 
 def compute_model_metrics(y, preds):
@@ -50,7 +55,7 @@ def inference(model, X):
 
     Inputs
     ------
-    model : ???
+    model : sklearn.linear_model.LogisticRegression
         Trained machine learning model.
     X : np.array
         Data used for prediction.
@@ -59,8 +64,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    # TODO: implement the function
-    pass
+    return model.predict(X)
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -72,13 +76,31 @@ def save_model(model, path):
     path : str
         Path to save pickle file.
     """
-    # TODO: implement the function
-    pass
+    try:
+        with open(path, 'wb') as fp:
+            pickle.dump(model, fp)
+    except Exception as e:
+        raise Exception(f'Could not write model to disk: {type(e)}: {e}')
+
 
 def load_model(path):
-    """ Loads pickle file from `path` and returns it."""
-    # TODO: implement the function
-    pass
+    """ Loads pickle file from `path` and returns it.
+    
+    Inputs
+    ------
+    path : str
+        Path to pickle model file
+    Returns
+    -------
+    model : sklearn.linear_model.LinearRegression
+        The desired model
+    """
+    try:
+        with open(path, 'rb') as fp:
+            model = pickle.load(fp)
+    except Exception as e:
+        raise Exception(f'Could not load model: {type(e)}: {e}')
+    return model
 
 
 def performance_on_categorical_slice(
