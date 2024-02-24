@@ -77,7 +77,7 @@ def save_model(model, path):
         Path to save pickle file.
     """
     try:
-        with open(path, 'wb') as fp:
+        with open(path, 'wb+') as fp:
             pickle.dump(model, fp)
     except Exception as e:
         raise Exception(f'Could not write model to disk: {type(e)}: {e}')
@@ -92,7 +92,7 @@ def load_model(path):
         Path to pickle model file
     Returns
     -------
-    model : sklearn.linear_model.LinearRegression
+    model : sklearn.linear_model.LogisticRegression
         The desired model
     """
     try:

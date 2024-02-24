@@ -31,7 +31,6 @@ cat_features = [
     "native-country",
 ]
 
-# TODO: use the process_data function provided to process the data.
 X_train, y_train, encoder, lb = process_data(
     train,
     categorical_features=cat_features,
@@ -48,7 +47,7 @@ X_test, y_test, _, _ = process_data(
     lb=lb,
 )
 
-model = train_model(X_train, y_train)
+model = train_model(X_train, y_train, max_iter=1000)
 
 # save the model and the encoder
 model_path = os.path.join(project_path, "model", "model.pkl")

@@ -11,9 +11,6 @@ def process_data(
     label binarizer for the labels. This can be used in either training or
     inference/validation.
 
-    Note: depending on the type of model used, you may want to add in functionality that
-    scales the continuous data.
-
     Inputs
     ------
     X : pd.DataFrame
