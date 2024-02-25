@@ -28,10 +28,10 @@ class Data(BaseModel):
 
 path =  os.path.dirname(os.path.abspath(__file__))
 encoder_path = os.path.join(path, "model", "encoder.pkl")
-encoder = load_model(path)
+encoder = load_model(encoder_path)
 
 model_path =  os.path.join(path, "model", "model.pkl")
-model = load_model(path)
+model = load_model(model_path)
 
 app = FastAPI()
 

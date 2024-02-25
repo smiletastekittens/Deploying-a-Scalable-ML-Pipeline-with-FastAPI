@@ -99,7 +99,7 @@ def load_model(path):
         with open(path, 'rb') as fp:
             model = pickle.load(fp)
     except Exception as e:
-        raise Exception(f'Could not load model: {type(e)}: {e}')
+        raise Exception(f'Could not load model: {type(e)}: {e}, path: {path}')
     return model
 
 
